@@ -11,3 +11,6 @@
 /*.userprefs
 /*.pidb
 /*.booproj
+
+# Mac DSSTORE
+.DS_Store
