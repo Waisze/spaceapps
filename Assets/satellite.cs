@@ -69,9 +69,9 @@ public class satellite : MonoBehaviour {
 		                      radius_in_Mm * Mathf.Cos (phi));
 
 		gameObject.transform.localPosition = newPos;
-
+	
 		if (targetCam) {
-			OVR.transform.position = newPos;
+			OVR.transform.localPosition = newPos;
 		}
 
 		/* Game pad controls */
