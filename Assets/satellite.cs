@@ -22,11 +22,15 @@ public class satellite : MonoBehaviour {
 	public bool y_axis_rotate;
 	public bool z_axis_rotate;
 
+	public bool targetCam;
+
 	GameObject OVR;
 	GameObject Earth;
 	// Use this for initialization
 	void Start () {
-		OVR = GameObject.Find("OVRPlayerController");
+		if (targetCam) {
+			OVR = GameObject.Find ("OVRPlayerController");
+		}
 		Earth = GameObject.Find("Earth");
 		radius = radius_earth + orbiting_height;
 		period = KMtoPeriod (KM_per_second);
@@ -81,8 +85,10 @@ public class satellite : MonoBehaviour {
 			                      -(Mathf.Sin(theta) * radius),
 			                      0) ;
 		}
-		
-		OVR.transform.position = newPos;
+		gameObject.transform.position = newPos;
+		if (targetCam) {
+			OVR.transform.position = newPos;
+		}
 //		OVR.transform.rotation.SetLookRotation (newRot);
 	}
 }
