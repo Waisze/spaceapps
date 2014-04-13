@@ -18,7 +18,9 @@ public class satellite : MonoBehaviour {
 	// theta deg
 	public float init_theta;
 	// targetCam boolean
-	public bool targetCam;
+	public int targetCam;
+	// satellite ID
+	public int satelliteID;
 
 	// orbiting height plus earth
 	private float radius_in_Mm;
@@ -33,9 +35,7 @@ public class satellite : MonoBehaviour {
 	GameObject Earth;
 	// Use this for initialization
 	void Start () {
-		if (targetCam) {
-			OVR = GameObject.Find ("OVRPlayerController");
-		}
+		OVR = GameObject.Find ("OVRPlayerController");
 		Earth = GameObject.Find("Earth");
 		radius_in_Mm = height_in_Mm + radius_earth;
 		period_in_sec = MMtoPeriod(Mm_per_second);
@@ -70,8 +70,25 @@ public class satellite : MonoBehaviour {
 
 		gameObject.transform.localPosition = newPos;
 	
-		if (targetCam) {
-			OVR.transform.localPosition = newPos;
+		if (targetCam == satelliteID) {	
+			// SUPER HACK
+			if ( targetCam == 1 ) {
+				OVR.transform.localPosition = new Vector3 (radius_in_Mm * Mathf.Cos (init_theta) * Mathf.Sin (phi),
+				                                           radius_in_Mm * Mathf.Sin (init_theta) * Mathf.Sin (phi),
+				                                           radius_in_Mm * Mathf.Cos (phi));
+			} else if ( targetCam == 2 ) {
+				OVR.transform.localPosition = new Vector3 ((radius_in_Mm + 0.02f) * Mathf.Cos (init_theta) * Mathf.Sin (phi),
+				                                           (radius_in_Mm + 0.02f) * Mathf.Sin (init_theta) * Mathf.Sin (phi),
+				                                           (radius_in_Mm + 0.02f) * Mathf.Cos (phi));
+			} else if ( targetCam == 3 ) {
+				OVR.transform.localPosition = new Vector3 (radius_in_Mm * Mathf.Cos (init_theta) * Mathf.Sin (phi),
+				                                           radius_in_Mm * Mathf.Sin (init_theta) * Mathf.Sin (phi),
+				                                           radius_in_Mm * Mathf.Cos (phi));
+			} else {
+				OVR.transform.localPosition =  new Vector3 ((radius_in_Mm - 1.501f) * Mathf.Cos (init_theta) * Mathf.Sin (phi),
+				                                            (radius_in_Mm - 1.501f) * Mathf.Sin (init_theta) * Mathf.Sin (phi),
+				                                            (radius_in_Mm - 1.501f) * Mathf.Cos (phi));
+			}
 		}
 
 		/* Game pad controls */
@@ -83,5 +100,16 @@ public class satellite : MonoBehaviour {
 			period_in_sec-=1;
 			Mm_per_second = PeriodtoMM(period_in_sec);
 		}
+		/* Hack view change */
+		if (Input.GetKey(KeyCode.Alpha1)) {
+			targetCam = 1;
+		} else if (Input.GetKey(KeyCode.Alpha2)) {
+			targetCam = 2;
+		} else if (Input.GetKey(KeyCode.Alpha3)) {
+			targetCam = 3;
+		} else if (Input.GetKey(KeyCode.Alpha4)) {
+			targetCam = 4;
+		}
+
 	}
 }
