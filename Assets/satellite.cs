@@ -8,23 +8,43 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class satellite : MonoBehaviour {
-	public float period;
-	public float radius;
+	public float KM_per_second;
+	private float period;
+
+	// orbiting height plus earth
+	private float radius;
 	
+	private const float radius_earth = 6.371f;
+
+	public float orbiting_height;
+
 	public bool x_axis_rotate;	
 	public bool y_axis_rotate;
 	public bool z_axis_rotate;
-	
+
 	GameObject OVR;
-	
-	
+	GameObject Earth;
 	// Use this for initialization
 	void Start () {
 		OVR = GameObject.Find("OVRPlayerController");
+		Earth = GameObject.Find("Earth");
+		radius = radius_earth + orbiting_height;
+		period = KMtoPeriod (KM_per_second);
+	}
+
+	private float KMtoPeriod (float speedInKM) {
+		float orbit_circumference = 2 * Mathf.PI * radius;
+		return orbit_circumference / speedInKM;
+	}
+
+	private float PeriodtoKM (float period) {
+		float orbit_circumference = 2 * Mathf.PI * radius;
+		return orbit_circumference/period;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 		float theta = ((Time.time % period) / period) * 360;
 		theta *= (Mathf.PI / 180);
 		Vector3 newPos = new Vector3(0,0,0);
