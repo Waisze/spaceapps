@@ -68,7 +68,7 @@ public class satellite : MonoBehaviour {
 		                      radius_in_Mm * Mathf.Sin (init_theta) * Mathf.Sin (phi),
 		                      radius_in_Mm * Mathf.Cos (phi));
 
-		gameObject.transform.position = newPos;
+		gameObject.transform.localPosition = newPos;
 
 		if (targetCam) {
 			OVR.transform.position = newPos;
