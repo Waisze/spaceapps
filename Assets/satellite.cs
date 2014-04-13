@@ -85,9 +85,9 @@ public class satellite : MonoBehaviour {
 			                      -(Mathf.Sin(theta) * radius),
 			                      0) ;
 		}
-		gameObject.transform.position = newPos;
+		gameObject.transform.localPosition = newPos;
 		if (targetCam) {
-			OVR.transform.position = newPos;
+			OVR.transform.localPosition = newPos;
 		}
 //		OVR.transform.rotation.SetLookRotation (newRot);
 	}
