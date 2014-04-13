@@ -73,17 +73,18 @@ public class satellite : MonoBehaviour {
 		if (targetCam == satelliteID) {	
 			// SUPER HACK
 			if ( targetCam == 1 ) {
-				OVR.transform.localPosition = new Vector3 (radius_in_Mm * Mathf.Cos (init_theta) * Mathf.Sin (phi),
-				                                           radius_in_Mm * Mathf.Sin (init_theta) * Mathf.Sin (phi),
-				                                           radius_in_Mm * Mathf.Cos (phi));
+				OVR.transform.localPosition = new Vector3 ((radius_in_Mm - 0.01f) * Mathf.Cos (init_theta) * Mathf.Sin (phi),
+				                                           (radius_in_Mm - 0.01f) * Mathf.Sin (init_theta) * Mathf.Sin (phi),
+				                                           (radius_in_Mm - 0.01f) * Mathf.Cos (phi));
 			} else if ( targetCam == 2 ) {
-				OVR.transform.localPosition = new Vector3 ((radius_in_Mm + 0.02f) * Mathf.Cos (init_theta) * Mathf.Sin (phi),
-				                                           (radius_in_Mm + 0.02f) * Mathf.Sin (init_theta) * Mathf.Sin (phi),
-				                                           (radius_in_Mm + 0.02f) * Mathf.Cos (phi));
+				OVR.transform.localPosition = new Vector3 ((radius_in_Mm + 0.001f) * Mathf.Cos (init_theta) * Mathf.Sin (phi),
+				                                           (radius_in_Mm + 0.001f) * Mathf.Sin (init_theta) * Mathf.Sin (phi),
+				                                           (radius_in_Mm + 0.001f) * Mathf.Cos (phi));
 			} else if ( targetCam == 3 ) {
-				OVR.transform.localPosition = new Vector3 (radius_in_Mm * Mathf.Cos (init_theta) * Mathf.Sin (phi),
-				                                           radius_in_Mm * Mathf.Sin (init_theta) * Mathf.Sin (phi),
-				                                           radius_in_Mm * Mathf.Cos (phi));
+				OVR.transform.localPosition = new Vector3 ((radius_in_Mm - 0.01f) * Mathf.Cos (init_theta) * Mathf.Sin (phi),
+				                                           (radius_in_Mm - 0.01f) * Mathf.Sin (init_theta) * Mathf.Sin (phi),
+				                                           (radius_in_Mm - 0.01f) * Mathf.Cos (phi));
+
 			} else {
 				OVR.transform.localPosition =  new Vector3 ((radius_in_Mm - 1.501f) * Mathf.Cos (init_theta) * Mathf.Sin (phi),
 				                                            (radius_in_Mm - 1.501f) * Mathf.Sin (init_theta) * Mathf.Sin (phi),
