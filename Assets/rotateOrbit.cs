@@ -3,13 +3,17 @@ using System.Collections;
 
 public class rotateOrbit : MonoBehaviour {
 
-	// Use this for initialization
+	//toggle rotation about one axis
+	public bool singleAxisRotation;
+	public float rotateOrbitSpeed;
+
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		gameObject.transform.Rotate (Time.deltaTime, 0, 0);
+		if(!singleAxisRotation) 
+			gameObject.transform.Rotate (rotateOrbitSpeed, 0, 0);
 	}
 }
